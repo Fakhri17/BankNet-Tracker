@@ -1,0 +1,31 @@
+{% extends "layouts/main.html" %}
+
+{% block content %}
+
+<section class="my-5">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-vcenter">
+        <thead>
+          <tr>
+            <th>Bank Name</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in banks %}
+            <tr>
+              <td>
+                <a href="{{ item.slug }}">{{ item.bankName }}</a>
+              </td>
+              
+             
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
