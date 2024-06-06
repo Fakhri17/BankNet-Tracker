@@ -75,14 +75,20 @@ def detail(slugBank):
 	domain = mapBank['linkBank']
 	hostname = get_hostname(domain)
 	ipv4, ipv6 = get_ip_addresses(hostname)
-	iface = ipaddress.ip_interface(ipv4)
-	netmask = iface.netmask
-	get_request = get_responseurl(f'http://{domain}')
-	ipInfo = {
-		'ipv4': ipv4,
-		'ipv6': ipv6,
-		'netmask': netmask
-	}
+	print(ipv4, ipv6)
+	if ipv4 != None:
+		iface = ipaddress.ip_interface(ipv4)
+		netmask = iface.netmask
+		get_request = get_responseurl(f'http://{domain}')
+		ipInfo = {
+			'ipv4': ipv4,
+			'ipv6': ipv6,
+			'netmask': netmask
+		}
+	else:
+		ipInfo = None
+		get_request = None
+	
 
 	whoisDomain = whois_domain(domain)
 
@@ -133,10 +139,12 @@ def detail(slugBank):
 		srv_record = None
 	else:
 		srv_record = srv_record.__dict__
+		# 
 
 	return render_template('_bank.html',
-						     bank=mapBank, hostname=hostname, ipInfo=ipInfo, get_request=get_request,
+						     bank=mapBank, hostname=hostname, 
 						     whoisDomain=whoisDomain,
+								 ipInfo=ipInfo, get_request=get_request,
 						     a_record=a_record, aaaa_record=aaaa_record,
 						     soa_record=soa_record,
 						     cname_record=cname_record, mx_record=mx_record, ns_record=ns_record,

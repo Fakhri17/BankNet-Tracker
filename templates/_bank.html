@@ -23,24 +23,27 @@
               </td>
               <td>{{ hostname }}</td>
             </tr>
-            <tr>
-              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
-                <strong>ipv4</strong>
-              </td>
-              <td>{{ ipInfo.ipv4 }}</td>
-            </tr>
-            <tr>
-              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
-                <strong>Netmask</strong>
-              </td>
-              <td>{{ ipInfo.netmask }}</td>
-            </tr>
-            <tr>
-              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
-                <strong>ipv6</strong>
-              </td>
-              <td>{{ ipInfo.ipv6 }}</td>
-            </tr>
+            {% if ipInfo != None %}
+              <tr>
+                <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                  <strong>ipv4</strong>
+                </td>
+                <td>{{ ipInfo.ipv4 }}</td>
+              </tr>
+              <tr>
+                <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                  <strong>Netmask</strong>
+                </td>
+                <td>{{ ipInfo.netmask }}</td>
+              </tr>
+              <tr>
+                <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                  <strong>ipv6</strong>
+                </td>
+                <td>{{ ipInfo.ipv6 }}</td>
+              </tr>
+            {% endif %}
+
           </tbody>
         </table>
       </div>
