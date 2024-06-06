@@ -126,135 +126,135 @@
       </div>
     </div>
     {% endif %}
+    {% if aaaa_record != None %}
+    <div class="my-4">
+      <div class="table-responsive mb-5">
+        <table class="table table-vcenter border table-nowrap">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h3 class="mb-0">AAAA RECORD</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in aaaa_record %}
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>{{ item|upper| replace("_", " ") }}</strong>
+              </td>
+              <td>{{ aaaa_record[item] }}</td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
     {% if soa_record != None %}
-      <div class="my-4">
-        <div class="table-responsive mb-5">
-          <table class="table table-vcenter border table-nowrap">
-            <thead>
-              <tr>
-                <th colspan="2">
-                  <h3 class="mb-0">SOA RECORD</h3>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for item in soa_record %}
-              <tr>
-                <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
-                  <strong>{{ item|upper| replace("_", " ") }}</strong>
-                </td>
-                <td>{{ soa_record[item] }}</td>
-              </tr>
-              {% endfor %}
-
-            </tbody>
-          </table>
-        </div>
-      </div>
-      {% endif %}
-      {% if cname_record != None %}
-        <div class="my-4">
-          <div class="table-responsive mb-5">
-            <table class="table table-vcenter border table-nowrap">
-              <thead>
-                <tr>
-                  <th colspan="2">
-                    <h3 class="mb-0">CNAME RECORD</h3>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for item in cname_record %}
-                <tr>
-                  <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
-                    <strong>{{ item|upper| replace("_", " ") }}</strong>
-                  </td>
-                  <td>{{ cname_record[item] }}</td>
-                </tr>
-                {% endfor %}
-            
-          </tbody>
-          </table>
-        </div>
-      </div>
-      {% endif %}
-      {% if cname_record != None %}
-        <div class="my-4">
-          <div class="table-responsive mb-5">
-            <table class="table table-vcenter border table-nowrap">
-              <thead>
-                <tr>
-                  <th colspan="2">
-                    <h3 class="mb-0">CNAME RECORD</h3>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for item in cname_record %}
-                <tr>
-                  <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
-                    <strong>{{ item|upper| replace("_", " ") }}</strong>
-                  </td>
-                  <td>{{ cname_record[item] }}</td>
-                </tr>
-                {% endfor %}
-              
-          </tbody>
-          </table>
-        </div>
-      </div>
-      {% endif %}
-      {% if mx_record != None %}
-        <div class="my-4">
-          <div class="table-responsive mb-5">
-            <table class="table table-vcenter border table-nowrap">
-              <thead>
-                <tr>
-                  <th colspan="2">
-                    <h3 class="mb-0">MX RECORD</h3>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for item in mx_record %}
-                <tr>
-                  <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
-                    <strong>{{ item|upper| replace("_", " ") }}</strong>
-                  </td>
-                  <td>{{ mx_record[item] }}</td>
-                </tr>
-                {% endfor %}
+    <div class="my-4">
+      <div class="table-responsive mb-5">
+        <table class="table table-vcenter border table-nowrap">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h3 class="mb-0">SOA RECORD</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in soa_record %}
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>{{ item|upper| replace("_", " ") }}</strong>
+              </td>
+              <td>{{ soa_record[item] }}</td>
+            </tr>
+            {% endfor %}
 
           </tbody>
-          </table>
-        </div>
+        </table>
       </div>
-      {% endif %}
-      {% if ns_record != None %}
-        <div class="my-4">
-          <div class="table-responsive mb-5">
-            <table class="table table-vcenter border table-nowrap">
-              <thead>
-                <tr>
-                  <th colspan="2">
-                    <h3 class="mb-0">NS RECORD</h3>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for item in ns_record %}
-                <tr>
-                  <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
-                    <strong>{{ item|upper| replace("_", " ") }}</strong>
-                  </td>
-                  <td>{{ ns_record[item] }}</td>
-                </tr>
-                {% endfor %}
+    </div>
+    {% endif %}
+    {% if cname_record != None %}
+    <div class="my-4">
+      <div class="table-responsive mb-5">
+        <table class="table table-vcenter border table-nowrap">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h3 class="mb-0">CNAME RECORD</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cname_record %}
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>{{ item|upper| replace("_", " ") }}</strong>
+              </td>
+              <td>{{ cname_record[item] }}</td>
+            </tr>
+            {% endfor %}
 
-            </tbody>
-          </table>
-        </div>
+          </tbody>
+        </table>
       </div>
+    </div>
+    {% endif %}
+    {% if mx_record != None %}
+    <div class="my-4">
+      <div class="table-responsive mb-5">
+        <table class="table table-vcenter border table-nowrap">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h3 class="mb-0">MX RECORD</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in mx_record %}
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>{{ item|upper| replace("_", " ") }}</strong>
+              </td>
+              <td>{{ mx_record[item] }}</td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+    {% if ns_record != None %}
+    <div class="my-4">
+      <div class="table-responsive mb-5">
+        <table class="table table-vcenter border table-nowrap">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h3 class="mb-0">NS RECORD</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in ns_record %}
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>{{ item|upper| replace("_", " ") }}</strong>
+              </td>
+              <td>{{ ns_record[item] }}</td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
     {% endif %}
     <br>
   </div>
