@@ -183,6 +183,28 @@
         </table>
       </div>
     </div>
+    <div class="my-4">
+      <div class="table-responsive mb-5">
+        <table class="table table-vcenter border table-nowrap">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h3 class="mb-0">SUBDO SOA</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in temp_soa %}
+            <tr>
+              
+              <td>{{ item }}</td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
     {% endif %}
     {% if cname_record != None %}
     <div class="my-4">

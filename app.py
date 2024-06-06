@@ -4,6 +4,7 @@ from helpers.ipaddress import get_ip_addresses, get_hostname, get_responseurl
 from helpers.whoisdomain import whois_domain
 from helpers.dnslookup import get_a_record, get_aaaa_record, get_soa_record, get_cname_record, get_mx_record, get_ns_record, get_txt_record, get_srv_record
 import ipaddress
+import re
 TEMPLATE_DIR = os.path.abspath('./templates')
 STATIC_DIR = os.path.abspath('./static')
 
@@ -109,6 +110,21 @@ def detail(slugBank):
 		soa_record = None
 	else:
 		soa_record = soa_record.__dict__
+		# Regular expression to match domain names
+		domain_pattern = re.compile(r'\b(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}\b', re.IGNORECASE)
+
+		# Find all domain names in the SOA records
+		domains = domain_pattern.findall(soa_record['rrset'].to_text())
+		# # example.com. 300 IN SOA dns1.example.com. hostmaster.example.com. 2023121301 7200 1800 1209600 300
+    # bpdbali.co.id. 499 IN SOA ns1.bpdbali.id.bpdbali.co.id. hostmaster.ns1.bpdbali.id.bpdbali.co.id. 2024030351 10800 3600 604800 86400
+		temp =[]
+		mainD = domain.split(".")[0]
+		for d in domains:
+			if mainD in d:
+				temp.append(d)
+
+		# Print the array of domain names
+		print(temp)
 
 	cname_record = get_cname_record(domain)
 	if cname_record is None:
@@ -144,7 +160,7 @@ def detail(slugBank):
 	return render_template('_bank.html',
 						     bank=mapBank, hostname=hostname, 
 						     whoisDomain=whoisDomain,
-								 ipInfo=ipInfo, get_request=get_request,
+								 ipInfo=ipInfo, get_request=get_request, temp_soa=temp,
 						     a_record=a_record, aaaa_record=aaaa_record,
 						     soa_record=soa_record,
 						     cname_record=cname_record, mx_record=mx_record, ns_record=ns_record,
