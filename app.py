@@ -2,11 +2,10 @@ import os
 from flask import Flask, render_template, abort
 from helpers.ipaddress import get_ip_addresses, get_hostname, get_responseurl
 from helpers.whoisdomain import whois_domain
-from helpers.dnslookup import get_a_record, get_aaaa_record, get_soa_record
+from helpers.dnslookup import get_a_record, get_aaaa_record, get_soa_record, get_cname_record, get_mx_record, get_ns_record
 import ipaddress
 TEMPLATE_DIR = os.path.abspath('./templates')
 STATIC_DIR = os.path.abspath('./static')
-
 
 app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 
@@ -39,8 +38,6 @@ banks = [
     {"bankName": "Bank Sumut (North Sumatra)", "linkBank": "banksumut.co.id", "slug": "bank-sumut-north-sumatra"},
     {"bankName": "Bank BPD DIY (Yogyakarta)", "linkBank": "bpddiy.co.id", "slug": "bank-bpd-diy-yogyakarta"}
 ]
-
-
 
 @app.route('/')
 def index():
@@ -84,10 +81,29 @@ def detail(slugBank):
     else:
          soa_record = soa_record.__dict__
 
+    cname_record = get_cname_record(domain)
+    if cname_record is None:
+         cname_record = None
+    else:
+         cname_record = cname_record.__dict__
+     
+    mx_record = get_mx_record(domain)
+    if mx_record is None:
+         mx_record = None
+    else:
+         mx_record = mx_record.__dict__
+     
+    ns_record = get_ns_record(domain)
+    if ns_record is None:
+         ns_record = None
+    else:
+         ns_record = ns_record.__dict__
+     
+
     return render_template('_bank.html', 
                            bank=mapBank, hostname=hostname, ipInfo=ipInfo, get_request=get_request, 
                            whoisDomain=whoisDomain, 
-                           a_record=a_record, aaaa_record=aaaa_record, soa_record=soa_record)
+                           a_record=a_record, aaaa_record=aaaa_record, soa_record=soa_record, cname_record=cname_record, mx_record=mx_record, ns_record=ns_record)
 
 if __name__ == '__main__':
     app.run(port=11003, debug=True)
