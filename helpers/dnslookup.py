@@ -1,57 +1,59 @@
+# get A records
 import dns.resolver
 
 def get_a_record(domain):
     try:
-        answers = dns.resolver.resolve(domain, 'A')
-        return [answer.to_text() for answer in answers]
+        a_record = dns.resolver.resolve(domain, 'A')
+        return a_record
+    except dns.resolver.NoAnswer:
+        return None
+    except dns.resolver.NXDOMAIN:
+        return None
+    except dns.resolver.NoNameservers:
+        return None
+    except dns.resolver.Timeout:
+        return None
+    except dns.resolver.NoRootSOA:
+        return None
+    except dns.exception.DNSException:
+        return None
     except Exception as e:
-        return str(e)
-
+        return None
+# get hostname
 def get_aaaa_record(domain):
     try:
-        answers = dns.resolver.resolve(domain, 'AAAA')
-        return [answer.to_text() for answer in answers]
+        aaaa_record = dns.resolver.resolve(domain, 'AAAA')
+        return aaaa_record
+    except dns.resolver.NoAnswer:
+        return None
+    except dns.resolver.NXDOMAIN:
+        return None
+    except dns.resolver.NoNameservers:
+        return None
+    except dns.resolver.Timeout:
+        return None
+    except dns.resolver.NoRootSOA:
+        return None
+    except dns.exception.DNSException:
+        return None
     except Exception as e:
-        return str(e)
-
-def get_cname_record(domain):
-    try:
-        answers = dns.resolver.resolve(domain, 'CNAME')
-        return [answer.to_text() for answer in answers]
-    except Exception as e:
-        return str(e)
-
-def get_mx_record(domain):
-    try:
-        answers = dns.resolver.resolve(domain, 'MX')
-        return [answer.to_text() for answer in answers]
-    except Exception as e:
-        return str(e)
-
-def get_ns_record(domain):
-    try:
-        answers = dns.resolver.resolve(domain, 'NS')
-        return [answer.to_text() for answer in answers]
-    except Exception as e:
-        return str(e)
-
-def get_srv_record(domain):
-    try:
-        answers = dns.resolver.resolve(domain, 'SRV')
-        return [answer.to_text() for answer in answers]
-    except Exception as e:
-        return str(e)
-
+        return None
+    
 def get_soa_record(domain):
     try:
-        answers = dns.resolver.resolve(domain, 'SOA')
-        return [answer.to_text() for answer in answers]
+        soa_record = dns.resolver.resolve(domain, 'SOA')
+        return soa_record
+    except dns.resolver.NoAnswer:
+        return None
+    except dns.resolver.NXDOMAIN:
+        return None
+    except dns.resolver.NoNameservers:
+        return None
+    except dns.resolver.Timeout:
+        return None
+    except dns.resolver.NoRootSOA:
+        return None
+    except dns.exception.DNSException:
+        return None
     except Exception as e:
-        return str(e)
-
-def get_txt_record(domain):
-    try:
-        answers = dns.resolver.resolve(domain, 'TXT')
-        return [answer.to_text() for answer in answers]
-    except Exception as e:
-        return str(e)
+        return None

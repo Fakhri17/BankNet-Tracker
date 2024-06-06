@@ -1,8 +1,9 @@
 import os
 from flask import Flask, render_template, abort
-from helpers.ipaddress import get_ip_addresses, get_hostname
+from helpers.ipaddress import get_ip_addresses, get_hostname, get_responseurl
 from helpers.whoisdomain import whois_domain
-from helpers.dnslookup import get_a_record, get_aaaa_record, get_cname_record, get_mx_record, get_ns_record, get_srv_record, get_soa_record, get_txt_record
+from helpers.dnslookup import get_a_record, get_aaaa_record, get_soa_record
+import ipaddress
 TEMPLATE_DIR = os.path.abspath('./templates')
 STATIC_DIR = os.path.abspath('./static')
 
@@ -54,14 +55,39 @@ def detail(slugBank):
     domain = mapBank['linkBank']
     hostname = get_hostname(domain)
     ipv4, ipv6 = get_ip_addresses(hostname)
+    iface = ipaddress.ip_interface(ipv4)
+    netmask = iface.netmask
+    get_request = get_responseurl(f'http://{domain}')
     ipInfo = {
         'ipv4': ipv4,
-        'ipv6': ipv6
+        'ipv6': ipv6,
+        'netmask': netmask
     }
 
     whoisDomain = whois_domain(domain)
+
     a_record = get_a_record(domain)
-    return render_template('_bank.html', bank=mapBank, hostname=hostname, ipInfo=ipInfo, whoisDomain=whoisDomain, a_record=a_record)
+    if a_record is None:
+         a_record = None
+    else:
+         a_record = a_record.__dict__
+
+    aaaa_record = get_aaaa_record(domain)
+    if aaaa_record is None:
+         aaaa_record = None
+    else:
+         aaaa_record = aaaa_record.__dict__
+
+    soa_record = get_soa_record(domain)
+    if soa_record is None:
+         soa_record = None
+    else:
+         soa_record = soa_record.__dict__
+
+    return render_template('_bank.html', 
+                           bank=mapBank, hostname=hostname, ipInfo=ipInfo, get_request=get_request, 
+                           whoisDomain=whoisDomain, 
+                           a_record=a_record, aaaa_record=aaaa_record, soa_record=soa_record)
 
 if __name__ == '__main__':
     app.run(port=11003, debug=True)

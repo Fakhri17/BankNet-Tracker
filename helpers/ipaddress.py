@@ -1,4 +1,13 @@
 import socket
+import requests
+
+def get_responseurl(url):
+    try:
+       response = requests.head(url, allow_redirects=True)
+       return response.headers
+    except requests.exceptions.RequestException:
+        return 'Error'
+    
 
 def get_hostname(url):
     return url.split('//')[-1].split('/')[0].split('?')[0].split(':')[0]

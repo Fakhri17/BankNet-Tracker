@@ -31,10 +31,42 @@
             </tr>
             <tr>
               <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>Netmask</strong>
+              </td>
+              <td>{{ ipInfo.netmask }}</td>
+            </tr>
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
                 <strong>ipv6</strong>
               </td>
               <td>{{ ipInfo.ipv6 }}</td>
             </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="my-4">
+      <div class="table-responsive mb-5">
+        <table class="table table-vcenter border table-nowrap">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h3 class="mb-0">Server Info</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in get_request %}
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>{{ item|upper| replace("_", " ") }}</strong>
+              </td>
+              <td>{{ get_request[item] }}</td>
+            </tr>
+            {% endfor %}
+
+
           </tbody>
         </table>
       </div>
@@ -52,12 +84,12 @@
           </thead>
           <tbody>
             {% for item in whoisDomain %}
-              <tr>
-                <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
-                  <strong>{{ item|upper| replace("_", " ") }}</strong>
-                </td>
-                <td>{{ whoisDomain[item] }}</td>
-              </tr>
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>{{ item|upper| replace("_", " ") }}</strong>
+              </td>
+              <td>{{ whoisDomain[item] }}</td>
+            </tr>
             {% endfor %}
 
 
@@ -65,7 +97,63 @@
         </table>
       </div>
     </div>
+    <h2 class="my-4">DNS LOOKUP</h2>
+    {# if a record != none #}
+    {% if a_record != None %}
+    <div class="my-4">
+      <div class="table-responsive mb-5">
+        <table class="table table-vcenter border table-nowrap">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h3 class="mb-0">A RECORD</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in a_record %}
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>{{ item|upper| replace("_", " ") }}</strong>
+              </td>
+              <td>{{ a_record[item] }}</td>
+            </tr>
+            {% endfor %}
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+    {% if soa_record != None %}
+      <div class="my-4">
+        <div class="table-responsive mb-5">
+          <table class="table table-vcenter border table-nowrap">
+            <thead>
+              <tr>
+                <th colspan="2">
+                  <h3 class="mb-0">SOA RECORD</h3>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in soa_record %}
+              <tr>
+                <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                  <strong>{{ item|upper| replace("_", " ") }}</strong>
+                </td>
+                <td>{{ soa_record[item] }}</td>
+              </tr>
+              {% endfor %}
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% endif %}
+    <br>
   </div>
 </section>
-{{ a_record }}
 {% endblock %}
