@@ -1,30 +1,55 @@
 {% extends "layouts/main.html" %}
 
 {% block content %}
-
 <section class="my-5">
-  <div class="container">
-    <div class="table-responsive">
-      <table class="table table-vcenter">
-        <thead>
-          <tr>
-            <th>Bank Name</th>
+  <div class="container py-6">
+    <div class="row flex-lg-row-reverse align-items-center g-5">
+      <div class="col-10 mx-auto col-sm-8 col-lg-6">
+        <img
+          src="https://images.unsplash.com/photo-1530435460869-d13625c69bbf?crop=entropy&amp;cs=tinysrgb&amp;fit=crop&amp;fm=jpg&amp;ixid=MnwzNzg0fDB8MXxzZWFyY2h8MTB8fHdlYnNpdGV8ZW58MHwwfHx8MTYyMTQ0NjkyNg&amp;ixlib=rb-1.2.1&amp;q=80&amp;w=1080&amp;h=768"
+          class="d-block mx-lg-auto img-fluid" alt="" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <div class="lc-block mb-3">
+          <div editable="rich">
+            <h2 class="fw-bold display-5">BankNet</h2>
+          </div>
+        </div>
 
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in banks %}
-            <tr>
-              <td>
-                <a href="{{ item.slug }}">{{ item.bankName }}</a>
-              </td>
-              
-             
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+        <div class="lc-block mb-3">
+          <div editable="rich">
+            <p class="lead h3">BankNet adalah platform online yang menyediakan berbagai alat jaringan
+              (networking tools)
+              yang sangat berguna untuk para profesional IT, administrator jaringan, dan pengembang. Website ini
+              dirancang untuk memudahkan pengguna dalam melakukan analisis dan diagnosa jaringan dengan cepat dan
+              efisien.
+            </p>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </div>
+
+</section>
+
+<section c>
+  <div class="container">
+    <h2 class="fw-bold display-5 mb-3">List Bank</h2>
+    <div class="row align-items-center">
+      {% for item in banks %}
+        <div class="col-6 col-md-4 col-lg-3 mb-3">
+          <a href="{{ item.slug }}">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <p>{{ item.bankName }}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+
 
   </div>
 </section>

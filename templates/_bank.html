@@ -4,11 +4,68 @@
 
 <section class="my-5">
   <div class="container">
-    {{ bank }}
-{{ hostname }}
-{{ ipInfo.ipv4 }}
-{{ ipInfo.ipv6 }}
+    <h1 class="fw-bold display-5">{{ bank.bankName }}</h1>
+    <p class="lead h3">Bank Url : {{ bank.linkBank }}</p>
+    <div class="my-4">
+      <div class="table-responsive">
+        <table class="table table-vcenter border table-nowrap">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h3 class="mb-0">Basic Info</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>Hostname</strong>
+              </td>
+              <td>{{ hostname }}</td>
+            </tr>
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>ipv4</strong>
+              </td>
+              <td>{{ ipInfo.ipv4 }}</td>
+            </tr>
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>ipv6</strong>
+              </td>
+              <td>{{ ipInfo.ipv6 }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
+    <div class="my-4">
+      <div class="table-responsive mb-5">
+        <table class="table table-vcenter border table-nowrap">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h3 class="mb-0">Domain Whois</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in whoisDomain %}
+              <tr>
+                <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                  <strong>{{ item|upper| replace("_", " ") }}</strong>
+                </td>
+                <td>{{ whoisDomain[item] }}</td>
+              </tr>
+            {% endfor %}
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </section>
+{{ a_record }}
 {% endblock %}

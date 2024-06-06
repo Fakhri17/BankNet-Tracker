@@ -1,9 +1,13 @@
+import os
 from flask import Flask, render_template, abort
 from helpers.ipaddress import get_ip_addresses, get_hostname
 from helpers.whoisdomain import whois_domain
+from helpers.dnslookup import get_a_record, get_aaaa_record, get_cname_record, get_mx_record, get_ns_record, get_srv_record, get_soa_record, get_txt_record
+TEMPLATE_DIR = os.path.abspath('./templates')
+STATIC_DIR = os.path.abspath('./static')
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
 
 banks = [
     {"bankName": "Bank Aceh", "linkBank": "bankaceh.co.id", "slug": "bank-aceh"},
@@ -54,9 +58,10 @@ def detail(slugBank):
         'ipv4': ipv4,
         'ipv6': ipv6
     }
+
     whoisDomain = whois_domain(domain)
-    
-    return render_template('_bank.html', bank=mapBank, hostname=hostname, ipInfo=ipInfo, whoisDomain=whoisDomain)
+    a_record = get_a_record(domain)
+    return render_template('_bank.html', bank=mapBank, hostname=hostname, ipInfo=ipInfo, whoisDomain=whoisDomain, a_record=a_record)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=11003, debug=True)
