@@ -6,7 +6,7 @@ def get_responseurl(url):
        response = requests.head(url, allow_redirects=True)
        return response.headers
     except requests.exceptions.RequestException:
-        return 'Error'
+        return None
     
 
 def get_hostname(url):

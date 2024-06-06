@@ -117,3 +117,41 @@ def get_ns_record(domain):
         return None
     except Exception as e:
         return None
+    
+def get_txt_record(domain):
+    try:
+        txt_record = dns.resolver.resolve(domain, 'TXT')
+        return txt_record
+    except dns.resolver.NoAnswer:
+        return None
+    except dns.resolver.NXDOMAIN:
+        return None
+    except dns.resolver.NoNameservers:
+        return None
+    except dns.resolver.Timeout:
+        return None
+    except dns.resolver.NoRootSOA:
+        return None
+    except dns.exception.DNSException:
+        return None
+    except Exception as e:
+        return None
+    
+def get_srv_record(domain):
+    try:
+        srv_record = dns.resolver.resolve(domain, 'SRV')
+        return srv_record
+    except dns.resolver.NoAnswer:
+        return None
+    except dns.resolver.NXDOMAIN:
+        return None
+    except dns.resolver.NoNameservers:
+        return None
+    except dns.resolver.Timeout:
+        return None
+    except dns.resolver.NoRootSOA:
+        return None
+    except dns.exception.DNSException:
+        return None
+    except Exception as e:
+        return None

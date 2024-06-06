@@ -46,6 +46,7 @@
       </div>
     </div>
 
+    {% if get_request != None %}
     <div class="my-4">
       <div class="table-responsive mb-5">
         <table class="table table-vcenter border table-nowrap">
@@ -71,6 +72,8 @@
         </table>
       </div>
     </div>
+    {% endif %}
+
 
     <div class="my-4">
       <div class="table-responsive mb-5">
@@ -248,6 +251,58 @@
                 <strong>{{ item|upper| replace("_", " ") }}</strong>
               </td>
               <td>{{ ns_record[item] }}</td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+    {% if txt_record != None %}
+    <div class="my-4">
+      <div class="table-responsive mb-5">
+        <table class="table table-vcenter border table-nowrap">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h3 class="mb-0">TXT RECORD</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in txt_record %}
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>{{ item|upper| replace("_", " ") }}</strong>
+              </td>
+              <td>{{ txt_record[item] }}</td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+    {% if srv_record != None %}
+    <div class="my-4">
+      <div class="table-responsive mb-5">
+        <table class="table table-vcenter border table-nowrap">
+          <thead>
+            <tr>
+              <th colspan="2">
+                <h3 class="mb-0">SRV RECORD</h3>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in srv_record %}
+            <tr>
+              <td style="min-width: 110px; width: 110px;" class="bg-blue-lt">
+                <strong>{{ item|upper| replace("_", " ") }}</strong>
+              </td>
+              <td>{{ srv_record[item] }}</td>
             </tr>
             {% endfor %}
 
